@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2P73L29BH7"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2P73L29BH7');</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>목돈 모으기 계산기 — 목표액 달성에 필요한 월 저축액 역산 | 머니시뮬</title>
+<meta name="description" content="1억 모으기 등 목표 금액과 기간을 넣으면 필요한 월 저축액을 역산하는 무료 계산기. 수익률 3%/5%/7% 민감도 표와 성장 경로 차트를 제공합니다.">
+<link rel="canonical" href="https://maestro24.github.io/moneysim/goal.html">
+<meta property="og:title" content="목돈 모으기 계산기 — 필요한 월 저축액 역산">
+<meta property="og:description" content="목표액·기간·수익률로 필요한 월 저축액을 역산. 수익률 민감도 표 제공.">
+<meta property="og:url" content="https://maestro24.github.io/moneysim/goal.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="머니시뮬">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230e9f6e'/%3E%3Cpath d='M7 21l6-7 5 4 7-9' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "목돈 목표 계산기 — 머니시뮬",
+      "url": "https://maestro24.github.io/moneysim/goal.html",
+      "description": "목표 금액 달성에 필요한 월 저축액을 역산하는 무료 목돈 모으기 계산기.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "ko",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "필요한 월 저축액은 어떻게 역산하나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "적립식 미래가치 공식을 거꾸로 풀어 닫힌형으로 계산합니다: PMT = (목표액 − 초기자금×(1+r)^n) × r ÷ ((1+r)^n − 1). r은 월 이율, n은 개월 수이며 매월 말 저축(기말불)을 가정합니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "10년 안에 1억을 모으려면 얼마나 저축해야 하나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "수익률에 따라 달라집니다. 연 5% 복리를 가정하면 월 약 65만원, 수익률 0%라면 월 약 83만원이 필요합니다. 계산기에서 본인의 수익률 가정을 넣어 정확히 확인해 보세요." }
+        },
+        {
+          "@type": "Question",
+          "name": "수익률 민감도 표는 왜 필요한가요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "미래 수익률은 불확실하므로 하나의 가정에 의존하면 위험합니다. 3%/5%/7% 각각에서 필요한 저축액을 비교하면, 수익률이 기대에 못 미쳐도 목표를 지킬 수 있는 저축 수준을 정할 수 있습니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "저축은 언제 한다고 가정하나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "매월 말 저축(기말불)을 가정합니다. 월초에 저축하면(기수불) 필요한 월 저축액이 약간 줄어듭니다." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="./index.html">📈 머니시뮬</a>
+  <nav class="site-nav">
+    <a href="./retire.html">은퇴</a>
+    <a href="./compound.html">복리</a>
+    <a href="./dividend.html">배당</a>
+    <a href="./loan.html">대출</a>
+    <a href="./goal.html" class="active">목돈</a>
+  </nav>
+</div></header>
+
+<main class="container">
+  <h1 class="page-title">🎯 목돈 목표 계산기</h1>
+  <p class="page-desc">목표 금액과 기간을 넣으면 <strong>필요한 월 저축액</strong>을 역산합니다. 수익률 가정별 민감도 표로 계획의 안전 여유까지 확인하세요.</p>
+
+  <section class="card">
+    <h2>목표 설정</h2>
+    <div class="form-grid">
+      <div class="field" id="f-target">
+        <label for="in-target">목표 금액</label>
+        <div class="row"><input type="number" id="in-target" inputmode="decimal"><span class="unit">만원</span></div>
+        <input type="range" aria-label="목표 금액 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-years">
+        <label for="in-years">목표 기간</label>
+        <div class="row"><input type="number" id="in-years" inputmode="numeric"><span class="unit">년</span></div>
+        <input type="range" aria-label="목표 기간 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-rate">
+        <label for="in-rate">기대 연 수익률</label>
+        <div class="row"><input type="number" id="in-rate" inputmode="decimal"><span class="unit">%</span></div>
+        <input type="range" aria-label="기대 수익률 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-init">
+        <label for="in-init">현재 보유 자금</label>
+        <div class="row"><input type="number" id="in-init" inputmode="decimal"><span class="unit">만원</span></div>
+        <input type="range" aria-label="보유 자금 슬라이더">
+        <div class="error"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="btn-share">🔗 시나리오 공유</button>
+    </div>
+  </section>
+
+  <section class="card result-panel" id="result">
+    <div class="result-hero">
+      <div class="label">목표 달성에 필요한 월 저축액</div>
+      <div class="result-big grade-good" id="required-pmt">-</div>
+      <div class="result-sub" id="pmt-sub"></div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat"><div class="k">총 납입 원금</div><div class="v" id="stat-deposit">-</div></div>
+      <div class="stat"><div class="k">수익이 채우는 금액</div><div class="v" id="stat-interest">-</div></div>
+      <div class="stat"><div class="k">검산 (만기 자산)</div><div class="v" id="stat-check">-</div></div>
+    </div>
+    <h3>수익률 민감도 (같은 목표, 다른 수익률)</h3>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>수익률 가정</th><th>필요 월 저축액</th><th>총 납입 원금</th><th>수익 기여 비중</th></tr></thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+    <h3>목표 도달 경로</h3>
+    <div class="chart-box" id="chart-paths"></div>
+  </section>
+
+  <section class="card seo-content">
+    <h2>필요 저축액 역산 공식</h2>
+    <p>적립식 미래가치 공식을 목표액에 대해 거꾸로 풀면 필요한 월 저축액이 닫힌형으로 나옵니다.</p>
+    <div class="formula">PMT = (FV − PV×(1+r)<sup>n</sup>) × r / ((1+r)<sup>n</sup> − 1) &nbsp;&nbsp;(r: 월 이율, n: 개월 수, 기말불)</div>
+    <p>월 이율은 연 수익률의 실효 변환 (1+R)<sup>1/12</sup>−1을 사용해 연간 복리 효과가 입력값과 정확히 일치하도록 했습니다. 결과 패널의 '검산' 값은 역산된 저축액으로 다시 미래가치를 계산한 것으로, 항상 목표액과 일치해야 합니다 — 이 왕복 검증도 자동화 테스트에 포함되어 있습니다.</p>
+    <p>수익률을 낙관적으로 잡을수록 필요한 저축액은 줄지만, 실제 수익률이 못 미치면 목표에 미달합니다. 민감도 표에서 <strong>보수적인 3% 가정의 저축액</strong>을 기준으로 잡으면 안전 여유가 생깁니다.</p>
+    <h3>자주 묻는 질문</h3>
+    <details class="faq"><summary>필요한 월 저축액은 어떻게 역산하나요?</summary><p>적립식 미래가치 공식을 거꾸로 풀어 닫힌형으로 계산합니다: PMT = (목표액 − 초기자금×(1+r)^n) × r ÷ ((1+r)^n − 1). r은 월 이율, n은 개월 수이며 매월 말 저축(기말불)을 가정합니다.</p></details>
+    <details class="faq"><summary>10년 안에 1억을 모으려면 얼마나 저축해야 하나요?</summary><p>수익률에 따라 달라집니다. 연 5% 복리를 가정하면 월 약 65만원, 수익률 0%라면 월 약 83만원이 필요합니다. 계산기에서 본인의 수익률 가정을 넣어 정확히 확인해 보세요.</p></details>
+    <details class="faq"><summary>수익률 민감도 표는 왜 필요한가요?</summary><p>미래 수익률은 불확실하므로 하나의 가정에 의존하면 위험합니다. 3%/5%/7% 각각에서 필요한 저축액을 비교하면, 수익률이 기대에 못 미쳐도 목표를 지킬 수 있는 저축 수준을 정할 수 있습니다.</p></details>
+    <details class="faq"><summary>저축은 언제 한다고 가정하나요?</summary><p>매월 말 저축(기말불)을 가정합니다. 월초에 저축하면(기수불) 필요한 월 저축액이 약간 줄어듭니다.</p></details>
+  </section>
+
+  <aside class="promo" data-coupang>
+    <div class="coupang-wrap">
+      <a href="https://link.coupang.com/a/flCfhuxEJM" target="_blank" rel="sponsored noopener" referrerpolicy="unsafe-url"><img src="https://ads-partners.coupang.com/banners/1006097?trackingCode=AF8748009&subId=&traceId=V0-301-879dd1202e5c73b2-I1006097&w=728&h=90" alt="쿠팡 파트너스 배너" style="max-width:100%;height:auto" loading="lazy"></a>
+    </div>
+    <p class="promo-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+  </aside>
+  <script>
+  setTimeout(function () {
+    document.querySelectorAll('[data-coupang]').forEach(function (el) {
+      var f = el.querySelector('iframe');
+      var m = el.querySelector('img');
+      var ok = (f && f.getBoundingClientRect().height >= 10) || (m && m.complete && m.naturalWidth > 0);
+      if (!ok) el.hidden = true;
+    });
+  }, 4000);
+  </script>
+</main>
+
+<footer class="site-footer">
+  <p class="disclaimer">본 시뮬레이션은 교육 목적이며 투자 조언이 아닙니다. 미래 수익률은 보장되지 않습니다.</p>
+  <p class="links"><a href="https://maestro24.github.io/salarylab/">연봉계산소</a> · <a href="https://maestro24.github.io/stockcal/">주식달력</a></p>
+  <p>© 2026 머니시뮬 (MoneySim)</p>
+</footer>
+
+<script type="module" src="./js/pages/goal.js"></script>
+
+<div class="side-rail side-l" data-coupang>
+  <script src="https://ads-partners.coupang.com/g.js"></script>
+  <script>new PartnersCoupang.G({ id: 1006093, template: "carousel", trackingCode: "AF8748009", width: "160", height: "600", tsource: "" });</script>
+</div>
+<div class="side-rail side-r" data-coupang>
+  <script>new PartnersCoupang.G({ id: 1006093, template: "carousel", trackingCode: "AF8748009", width: "160", height: "600", tsource: "" });</script>
+</div>
+</body>
+</html>

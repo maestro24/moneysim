@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2P73L29BH7"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2P73L29BH7');</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>배당 재투자 계산기 — 배당 스노우볼 시뮬레이션 (월 배당 목표) | 머니시뮬</title>
+<meta name="description" content="배당 재투자 스노우볼 효과를 시뮬레이션하는 무료 계산기. 배당수익률·배당성장률·주가성장률을 반영해 월 배당 목표 도달 시점을 계산합니다.">
+<link rel="canonical" href="https://maestro24.github.io/moneysim/dividend.html">
+<meta property="og:title" content="배당 재투자 계산기 — 배당 스노우볼 시뮬레이션">
+<meta property="og:description" content="배당 재투자 스노우볼 효과와 월 배당 목표 도달 시점 계산.">
+<meta property="og:url" content="https://maestro24.github.io/moneysim/dividend.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="머니시뮬">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230e9f6e'/%3E%3Cpath d='M7 21l6-7 5 4 7-9' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "배당 재투자 계산기 — 머니시뮬",
+      "url": "https://maestro24.github.io/moneysim/dividend.html",
+      "description": "배당 재투자 스노우볼 효과와 월 배당 목표 도달 시점을 계산하는 무료 배당 계산기.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "ko",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "배당 스노우볼이란 무엇인가요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "받은 배당금으로 주식을 더 사면 보유 수량이 늘고, 늘어난 수량이 다시 더 많은 배당을 만드는 눈덩이 효과입니다. 배당성장까지 겹치면 후반부 가속이 매우 커집니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "배당수익률과 배당성장률은 어떻게 다른가요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "배당수익률은 현재 주가 대비 연간 배당금의 비율(예: 3.5%)이고, 배당성장률은 주당 배당금이 매년 늘어나는 속도(예: 연 5%)입니다. 이 계산기는 두 값을 독립적으로 입력받아 주당 배당금과 주가를 각각 성장시킵니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "배당은 언제 지급된다고 가정하나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "연간 배당의 1/12이 매월 지급되고 즉시 재투자된다고 가정합니다. 실제 분기·반기 배당과는 시점 차이가 있지만 장기 추세에는 큰 영향이 없습니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "세금은 반영되나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "반영되지 않습니다. 한국 기준 배당소득세(15.4%)를 고려하려면 배당수익률에 0.846을 곱한 값을 입력하는 방법이 있습니다." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="./index.html">📈 머니시뮬</a>
+  <nav class="site-nav">
+    <a href="./retire.html">은퇴</a>
+    <a href="./compound.html">복리</a>
+    <a href="./dividend.html" class="active">배당</a>
+    <a href="./loan.html">대출</a>
+    <a href="./goal.html">목돈</a>
+  </nav>
+</div></header>
+
+<main class="container">
+  <h1 class="page-title">❄️ 배당 재투자 계산기</h1>
+  <p class="page-desc">배당을 재투자할 때와 하지 않을 때의 차이 — <strong>스노우볼 효과</strong>를 시각화하고, 월 배당 목표 도달 시점을 계산합니다.</p>
+
+  <section class="card">
+    <h2>투자 조건</h2>
+    <div class="form-grid">
+      <div class="field" id="f-init">
+        <label for="in-init">초기 투자금</label>
+        <div class="row"><input type="number" id="in-init" inputmode="decimal"><span class="unit">만원</span></div>
+        <input type="range" aria-label="초기 투자금 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-pmt">
+        <label for="in-pmt2">월 추가 투자</label>
+        <div class="row"><input type="number" id="in-pmt2" inputmode="decimal"><span class="unit">만원</span></div>
+        <input type="range" aria-label="월 추가 투자 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-yield">
+        <label for="in-yield">현재 배당수익률</label>
+        <div class="row"><input type="number" id="in-yield" inputmode="decimal"><span class="unit">%</span></div>
+        <input type="range" aria-label="배당수익률 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-dg">
+        <label for="in-dg">배당성장률 (연)</label>
+        <div class="row"><input type="number" id="in-dg" inputmode="decimal"><span class="unit">%</span></div>
+        <input type="range" aria-label="배당성장률 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-pg">
+        <label for="in-pg">주가성장률 (연)</label>
+        <div class="row"><input type="number" id="in-pg" inputmode="decimal"><span class="unit">%</span></div>
+        <input type="range" aria-label="주가성장률 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-target">
+        <label for="in-target">목표 월 배당</label>
+        <div class="row"><input type="number" id="in-target" inputmode="decimal"><span class="unit">만원</span></div>
+        <input type="range" aria-label="목표 월 배당 슬라이더">
+        <div class="error"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="btn-share">🔗 시나리오 공유</button>
+    </div>
+  </section>
+
+  <section class="card result-panel" id="result">
+    <div class="result-hero">
+      <div class="label">목표 월 배당 도달 시점</div>
+      <div class="result-big" id="reach-time">-</div>
+      <div class="result-sub" id="reach-sub"></div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat"><div class="k">30년 후 자산 (재투자)</div><div class="v" id="stat-final">-</div></div>
+      <div class="stat"><div class="k">10년 후 월 배당</div><div class="v" id="stat-div10">-</div></div>
+      <div class="stat"><div class="k">30년 후 월 배당</div><div class="v" id="stat-div30">-</div></div>
+      <div class="stat"><div class="k">재투자로 늘어난 자산</div><div class="v" id="stat-snowball">-</div></div>
+    </div>
+    <h3>자산 성장: 재투자 vs 미재투자 (스노우볼)</h3>
+    <div class="chart-box" id="chart-value"></div>
+    <h3>월 배당금 추이</h3>
+    <div class="chart-box" id="chart-dividend"></div>
+  </section>
+
+  <section class="card seo-content">
+    <h2>배당 재투자 계산 방법</h2>
+    <p>이 계산기는 주가와 주당 배당금을 <strong>독립적으로 성장</strong>시키는 모델을 사용합니다. 주가는 주가성장률로, 주당 배당금은 배당성장률로 매월 복리 성장하며, 매월 받은 배당(연 배당의 1/12)과 추가 투자금으로 현재 주가에 주식을 더 삽니다.</p>
+    <div class="formula">월 배당 = 보유수량 × 주당 월 배당, &nbsp; 보유수량<sub>다음달</sub> = 보유수량 + (월 배당 + 월 추가투자) ÷ 주가</div>
+    <p>재투자를 하면 수량 증가 → 배당 증가 → 더 많은 재투자의 순환이 생깁니다. 차트에서 두 곡선의 간격이 시간이 갈수록 벌어지는 것이 바로 스노우볼 효과입니다. 배당성장률이 높을수록 초반 배당수익률이 낮아도 장기 월 배당이 역전되는 것도 실험해 보세요.</p>
+    <h3>자주 묻는 질문</h3>
+    <details class="faq"><summary>배당 스노우볼이란 무엇인가요?</summary><p>받은 배당금으로 주식을 더 사면 보유 수량이 늘고, 늘어난 수량이 다시 더 많은 배당을 만드는 눈덩이 효과입니다. 배당성장까지 겹치면 후반부 가속이 매우 커집니다.</p></details>
+    <details class="faq"><summary>배당수익률과 배당성장률은 어떻게 다른가요?</summary><p>배당수익률은 현재 주가 대비 연간 배당금의 비율(예: 3.5%)이고, 배당성장률은 주당 배당금이 매년 늘어나는 속도(예: 연 5%)입니다. 이 계산기는 두 값을 독립적으로 입력받아 주당 배당금과 주가를 각각 성장시킵니다.</p></details>
+    <details class="faq"><summary>배당은 언제 지급된다고 가정하나요?</summary><p>연간 배당의 1/12이 매월 지급되고 즉시 재투자된다고 가정합니다. 실제 분기·반기 배당과는 시점 차이가 있지만 장기 추세에는 큰 영향이 없습니다.</p></details>
+    <details class="faq"><summary>세금은 반영되나요?</summary><p>반영되지 않습니다. 한국 기준 배당소득세(15.4%)를 고려하려면 배당수익률에 0.846을 곱한 값을 입력하는 방법이 있습니다.</p></details>
+  </section>
+
+  <aside class="promo" data-coupang>
+    <div class="coupang-wrap">
+      <a href="https://link.coupang.com/a/flCfhuxEJM" target="_blank" rel="sponsored noopener" referrerpolicy="unsafe-url"><img src="https://ads-partners.coupang.com/banners/1006097?trackingCode=AF8748009&subId=&traceId=V0-301-879dd1202e5c73b2-I1006097&w=728&h=90" alt="쿠팡 파트너스 배너" style="max-width:100%;height:auto" loading="lazy"></a>
+    </div>
+    <p class="promo-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+  </aside>
+  <script>
+  setTimeout(function () {
+    document.querySelectorAll('[data-coupang]').forEach(function (el) {
+      var f = el.querySelector('iframe');
+      var m = el.querySelector('img');
+      var ok = (f && f.getBoundingClientRect().height >= 10) || (m && m.complete && m.naturalWidth > 0);
+      if (!ok) el.hidden = true;
+    });
+  }, 4000);
+  </script>
+</main>
+
+<footer class="site-footer">
+  <p class="disclaimer">본 시뮬레이션은 교육 목적이며 투자 조언이 아닙니다. 미래 수익률은 보장되지 않습니다.</p>
+  <p class="links"><a href="https://maestro24.github.io/salarylab/">연봉계산소</a> · <a href="https://maestro24.github.io/stockcal/">주식달력</a></p>
+  <p>© 2026 머니시뮬 (MoneySim)</p>
+</footer>
+
+<script type="module" src="./js/pages/dividend.js"></script>
+
+<div class="side-rail side-l" data-coupang>
+  <script src="https://ads-partners.coupang.com/g.js"></script>
+  <script>new PartnersCoupang.G({ id: 1006093, template: "carousel", trackingCode: "AF8748009", width: "160", height: "600", tsource: "" });</script>
+</div>
+<div class="side-rail side-r" data-coupang>
+  <script>new PartnersCoupang.G({ id: 1006093, template: "carousel", trackingCode: "AF8748009", width: "160", height: "600", tsource: "" });</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2P73L29BH7"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2P73L29BH7');</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>머니시뮬 — 몬테카를로 재테크 시뮬레이터 (은퇴·복리·배당·대출·목돈 계산기)</title>
+<meta name="description" content="10,000개의 미래를 시뮬레이션하는 무료 재테크 계산기. 은퇴 자금 성공확률, 복리 계산, 배당 재투자, 대출 상환 비교, 목돈 모으기를 확률 기반 차트로 확인하세요.">
+<link rel="canonical" href="https://maestro24.github.io/moneysim/">
+<meta property="og:title" content="머니시뮬 — 몬테카를로 재테크 시뮬레이터">
+<meta property="og:description" content="10,000개의 미래를 시뮬레이션하는 무료 재테크 계산기. 은퇴·복리·배당·대출·목돈을 확률로 확인하세요.">
+<meta property="og:url" content="https://maestro24.github.io/moneysim/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="머니시뮬">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230e9f6e'/%3E%3Cpath d='M7 21l6-7 5 4 7-9' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "머니시뮬 (MoneySim)",
+      "url": "https://maestro24.github.io/moneysim/",
+      "description": "몬테카를로 시뮬레이션 기반 무료 재테크 계산기 모음: 은퇴 자금, 복리, 배당 재투자, 대출 상환, 목돈 모으기.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "ko",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "몬테카를로 시뮬레이션이란 무엇인가요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "무작위 수익률 시나리오를 수천~수만 번 생성해 결과의 확률 분포를 구하는 방법입니다. 머니시뮬은 10,000개의 시나리오를 돌려 '성공확률'과 10/50/90 백분위 구간을 보여줍니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "머니시뮬의 계산 결과는 믿을 수 있나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "복리·연금·대출 상환의 닫힌형 공식과 몬테카를로 수렴치를 자동화 테스트로 교차 검증합니다. 다만 미래 수익률 자체는 누구도 보장할 수 없으며, 결과는 입력한 가정에 따른 확률 추정치입니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "사용료가 있나요? 입력한 정보는 저장되나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "완전 무료이며 모든 계산은 브라우저 안에서만 실행됩니다. 입력한 금액이나 시나리오는 서버로 전송되지 않습니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "이 사이트의 결과를 투자 판단에 그대로 사용해도 되나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "아니요. 본 시뮬레이션은 교육 목적이며 투자 조언이 아닙니다. 실제 투자 결정 전에는 전문가와 상담하시기 바랍니다." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="./index.html">📈 머니시뮬</a>
+  <nav class="site-nav">
+    <a href="./retire.html">은퇴</a>
+    <a href="./compound.html">복리</a>
+    <a href="./dividend.html">배당</a>
+    <a href="./loan.html">대출</a>
+    <a href="./goal.html">목돈</a>
+  </nav>
+</div></header>
+
+<main class="container">
+  <h1 class="page-title">10,000개의 미래를 시뮬레이션하는 재테크 계산기</h1>
+  <p class="page-desc">"몇 살에 얼마"라고 단정하는 계산기 대신, 머니시뮬은 몬테카를로 시뮬레이션으로 <strong>성공확률과 확률 구간</strong>을 보여줍니다. 설치·가입 없이 무료로 사용하세요.</p>
+
+  <div class="tool-grid">
+    <a class="tool-card" href="./retire.html">
+      <span class="icon">🏖️</span>
+      <h3>은퇴 시뮬레이터</h3>
+      <p>10,000개 시나리오로 은퇴 자금 성공확률과 자산 경로 밴드를 확인. 파이어족 계산기.</p>
+    </a>
+    <a class="tool-card" href="./compound.html">
+      <span class="icon">🌱</span>
+      <h3>복리 계산기</h3>
+      <p>일시금 + 월 적립 복리. 원금과 이자를 분리한 성장 차트와 연도별 표.</p>
+    </a>
+    <a class="tool-card" href="./dividend.html">
+      <span class="icon">❄️</span>
+      <h3>배당 재투자 계산기</h3>
+      <p>배당 스노우볼 효과 시각화. 월 배당 목표 도달 시점을 계산.</p>
+    </a>
+    <a class="tool-card" href="./loan.html">
+      <span class="icon">🏠</span>
+      <h3>대출 상환 비교</h3>
+      <p>원리금균등·원금균등·만기일시 총이자 비교와 중도상환 효과.</p>
+    </a>
+    <a class="tool-card" href="./goal.html">
+      <span class="icon">🎯</span>
+      <h3>목돈 목표 계산기</h3>
+      <p>목표액·기간·수익률로 필요한 월 저축액을 역산. 수익률 민감도 표.</p>
+    </a>
+  </div>
+
+  <section class="card seo-content">
+    <h2>몬테카를로 시뮬레이션이란?</h2>
+    <p>미래 수익률은 아무도 모릅니다. 그런데도 대부분의 재테크 계산기는 "연 6%"처럼 <strong>단 하나의 수익률</strong>을 가정해 하나의 답을 내놓습니다. 현실의 시장은 어떤 해에는 +20%, 어떤 해에는 −15%로 출렁이고, 그 <em>순서</em>에 따라 같은 평균 수익률이라도 결과가 크게 달라집니다(수익률 순서 위험).</p>
+    <p>몬테카를로 시뮬레이션은 이 불확실성을 정면으로 다룹니다. 기대수익률(μ)과 변동성(σ)을 입력하면, 컴퓨터가 무작위 수익률 경로를 <strong>10,000개</strong> 생성해 각각의 미래를 계산합니다. 그 결과를 모으면 "자산이 고갈되지 않을 확률 87%", "중간 시나리오에서는 4.2억, 나쁜 10% 시나리오에서는 1.1억"처럼 <strong>확률의 언어</strong>로 답할 수 있습니다.</p>
+    <h3>머니시뮬의 수익률 모델</h3>
+    <p>머니시뮬은 금융공학에서 표준적으로 쓰이는 <strong>기하브라운운동(GBM)</strong> 기반 로그정규 수익률 모델을 사용합니다.</p>
+    <div class="formula">r = exp(μ<sub>log</sub> + σ·z) − 1,&nbsp;&nbsp; μ<sub>log</sub> = ln(1+μ) − σ²/2,&nbsp;&nbsp; z ~ N(0,1)</div>
+    <p>μ<sub>log</sub>에 −σ²/2 보정을 적용해 시나리오들의 <strong>산술평균 수익률이 입력한 μ와 정확히 일치</strong>하도록 만듭니다. 난수는 시드 고정 방식(mulberry32)이라 같은 입력이면 언제나 같은 결과가 나옵니다(재현성).</p>
+    <h3>계산 정확성 검증</h3>
+    <p>머니시뮬의 모든 수식은 자동화 테스트로 검증됩니다: 복리·연금·대출 상환의 닫힌형 공식을 알려진 값과 대조하고, 변동성이 0일 때 시뮬레이션이 공식과 완전히 일치하는지, 변동성이 있을 때 10,000회 평균이 이론 기대값에 ±1% 이내로 수렴하는지 확인합니다.</p>
+    <h3>자주 묻는 질문</h3>
+    <details class="faq"><summary>몬테카를로 시뮬레이션이란 무엇인가요?</summary><p>무작위 수익률 시나리오를 수천~수만 번 생성해 결과의 확률 분포를 구하는 방법입니다. 머니시뮬은 10,000개의 시나리오를 돌려 '성공확률'과 10/50/90 백분위 구간을 보여줍니다.</p></details>
+    <details class="faq"><summary>머니시뮬의 계산 결과는 믿을 수 있나요?</summary><p>복리·연금·대출 상환의 닫힌형 공식과 몬테카를로 수렴치를 자동화 테스트로 교차 검증합니다. 다만 미래 수익률 자체는 누구도 보장할 수 없으며, 결과는 입력한 가정에 따른 확률 추정치입니다.</p></details>
+    <details class="faq"><summary>사용료가 있나요? 입력한 정보는 저장되나요?</summary><p>완전 무료이며 모든 계산은 브라우저 안에서만 실행됩니다. 입력한 금액이나 시나리오는 서버로 전송되지 않습니다.</p></details>
+    <details class="faq"><summary>이 사이트의 결과를 투자 판단에 그대로 사용해도 되나요?</summary><p>아니요. 본 시뮬레이션은 교육 목적이며 투자 조언이 아닙니다. 실제 투자 결정 전에는 전문가와 상담하시기 바랍니다.</p></details>
+  </section>
+
+  <aside class="promo" data-coupang>
+    <div class="coupang-wrap">
+      <a href="https://link.coupang.com/a/flCfhuxEJM" target="_blank" rel="sponsored noopener" referrerpolicy="unsafe-url"><img src="https://ads-partners.coupang.com/banners/1006097?trackingCode=AF8748009&subId=&traceId=V0-301-879dd1202e5c73b2-I1006097&w=728&h=90" alt="쿠팡 파트너스 배너" style="max-width:100%;height:auto" loading="lazy"></a>
+    </div>
+    <p class="promo-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+  </aside>
+  <script>
+  setTimeout(function () {
+    document.querySelectorAll('[data-coupang]').forEach(function (el) {
+      var f = el.querySelector('iframe');
+      var m = el.querySelector('img');
+      var ok = (f && f.getBoundingClientRect().height >= 10) || (m && m.complete && m.naturalWidth > 0);
+      if (!ok) el.hidden = true;
+    });
+  }, 4000);
+  </script>
+</main>
+
+<footer class="site-footer">
+  <p class="disclaimer">본 시뮬레이션은 교육 목적이며 투자 조언이 아닙니다. 미래 수익률은 보장되지 않습니다.</p>
+  <p class="links"><a href="https://maestro24.github.io/salarylab/">연봉계산소</a> · <a href="https://maestro24.github.io/stockcal/">주식달력</a></p>
+  <p>© 2026 머니시뮬 (MoneySim)</p>
+</footer>
+
+<div class="side-rail side-l" data-coupang>
+  <script src="https://ads-partners.coupang.com/g.js"></script>
+  <script>new PartnersCoupang.G({ id: 1006093, template: "carousel", trackingCode: "AF8748009", width: "160", height: "600", tsource: "" });</script>
+</div>
+<div class="side-rail side-r" data-coupang>
+  <script>new PartnersCoupang.G({ id: 1006093, template: "carousel", trackingCode: "AF8748009", width: "160", height: "600", tsource: "" });</script>
+</div>
+</body>
+</html>

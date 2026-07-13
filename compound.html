@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2P73L29BH7"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2P73L29BH7');</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>복리 계산기 — 적립식 복리 이자 계산 (월 적립 + 일시금) | 머니시뮬</title>
+<meta name="description" content="일시금과 월 적립을 함께 계산하는 무료 복리 계산기. 연복리·월복리 선택, 원금과 이자를 분리한 성장 차트, 연도별 상세 표까지 제공합니다.">
+<link rel="canonical" href="https://maestro24.github.io/moneysim/compound.html">
+<meta property="og:title" content="복리 계산기 — 적립식 복리 이자 계산">
+<meta property="og:description" content="일시금 + 월 적립 복리 계산. 원금·이자 분리 차트와 연도별 표.">
+<meta property="og:url" content="https://maestro24.github.io/moneysim/compound.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="머니시뮬">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230e9f6e'/%3E%3Cpath d='M7 21l6-7 5 4 7-9' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "복리 계산기 — 머니시뮬",
+      "url": "https://maestro24.github.io/moneysim/compound.html",
+      "description": "일시금 + 월 적립 복리를 연복리/월복리로 계산하는 무료 복리 계산기.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "ko",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "복리와 단리는 무엇이 다른가요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "단리는 원금에만 이자가 붙지만, 복리는 이자에도 다시 이자가 붙습니다. 기간이 길어질수록 차이가 기하급수적으로 벌어져 '복리의 마법'이라고 부릅니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "연복리와 월복리 옵션의 차이는 무엇인가요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "연복리는 입력한 이율이 연간 실효수익률이 되도록 월 이율 (1+r)^(1/12)−1을 적용합니다. 월복리는 명목이율을 12로 나눈 r/12을 매월 적용해, 연 실효수익률이 입력값보다 약간 높아집니다((1+r/12)^12−1)." }
+        },
+        {
+          "@type": "Question",
+          "name": "월 적립금은 언제 납입한다고 가정하나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "매월 말 납입(기말불)을 가정합니다. 월초 납입(기수불)이면 결과가 (1+월이율)배만큼 커집니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "72의 법칙이란?",
+          "acceptedAnswer": { "@type": "Answer", "text": "원금이 2배가 되는 기간을 어림하는 경험칙으로, 72를 연이율(%)로 나누면 대략의 년수가 나옵니다. 예: 연 6%면 72÷6 = 약 12년." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="./index.html">📈 머니시뮬</a>
+  <nav class="site-nav">
+    <a href="./retire.html">은퇴</a>
+    <a href="./compound.html" class="active">복리</a>
+    <a href="./dividend.html">배당</a>
+    <a href="./loan.html">대출</a>
+    <a href="./goal.html">목돈</a>
+  </nav>
+</div></header>
+
+<main class="container">
+  <h1 class="page-title">🌱 복리 계산기</h1>
+  <p class="page-desc">일시금과 월 적립을 함께 계산하고, <strong>원금과 이자가 분리된 성장 차트</strong>로 복리의 힘을 확인하세요.</p>
+
+  <section class="card">
+    <h2>계산 조건</h2>
+    <div class="form-grid">
+      <div class="field" id="f-pv">
+        <label for="in-pv">시작 일시금</label>
+        <div class="row"><input type="number" id="in-pv" inputmode="decimal"><span class="unit">만원</span></div>
+        <input type="range" aria-label="일시금 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-pmt">
+        <label for="in-pmt">월 적립액</label>
+        <div class="row"><input type="number" id="in-pmt" inputmode="decimal"><span class="unit">만원</span></div>
+        <input type="range" aria-label="월 적립액 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-rate">
+        <label for="in-rate">연 수익률</label>
+        <div class="row"><input type="number" id="in-rate" inputmode="decimal"><span class="unit">%</span></div>
+        <input type="range" aria-label="연 수익률 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-years">
+        <label for="in-years">투자 기간</label>
+        <div class="row"><input type="number" id="in-years" inputmode="numeric"><span class="unit">년</span></div>
+        <input type="range" aria-label="투자 기간 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field">
+        <label for="f-comp">복리 주기</label>
+        <select id="f-comp">
+          <option value="annual" selected>연복리 (실효 연수익률 = 입력값)</option>
+          <option value="monthly">월복리 (명목이율 ÷ 12)</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="btn-share">🔗 시나리오 공유</button>
+    </div>
+  </section>
+
+  <section class="card result-panel" id="result">
+    <div class="result-hero">
+      <div class="label">만기 총자산</div>
+      <div class="result-big grade-good" id="final-total">-</div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat"><div class="k">납입 원금 합계</div><div class="v" id="stat-principal">-</div></div>
+      <div class="stat"><div class="k">이자(수익) 합계</div><div class="v" id="stat-interest">-</div></div>
+      <div class="stat"><div class="k">총자산 중 이자 비중</div><div class="v" id="stat-ratio">-</div></div>
+    </div>
+    <h3>원금 vs 이자 성장 차트</h3>
+    <div class="chart-box" id="chart-growth"></div>
+    <h3>연도별 상세</h3>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>연차</th><th>납입 원금 누계</th><th>이자 누계</th><th>총자산</th></tr></thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card seo-content">
+    <h2>복리 계산 공식</h2>
+    <p>일시금의 미래가치는 <strong>FV = PV × (1+r)<sup>n</sup></strong>, 매월 말 적립하는 적립식(기말불 연금)의 미래가치는 아래 공식으로 계산합니다.</p>
+    <div class="formula">FV = PMT × ((1+r)<sup>n</sup> − 1) / r &nbsp;&nbsp;(r: 월 이율, n: 개월 수)</div>
+    <p>이 계산기는 두 공식을 결합해 일시금 + 월 적립을 동시에 계산합니다. 예를 들어 100만원을 연 5%로 10년 굴리면 정확히 1,628,894.63원이 됩니다 — 이 값은 자동화 테스트로 검증되는 기준값 중 하나입니다.</p>
+    <p>복리의 핵심은 <strong>시간</strong>입니다. 같은 월 50만원 적립이라도 20년과 30년의 차이는 단순히 1.5배가 아니라, 이자에 이자가 붙으면서 훨씬 크게 벌어집니다. 차트에서 회색(원금)과 초록(이자) 영역의 비율이 기간에 따라 어떻게 역전되는지 확인해 보세요.</p>
+    <h3>자주 묻는 질문</h3>
+    <details class="faq"><summary>복리와 단리는 무엇이 다른가요?</summary><p>단리는 원금에만 이자가 붙지만, 복리는 이자에도 다시 이자가 붙습니다. 기간이 길어질수록 차이가 기하급수적으로 벌어져 '복리의 마법'이라고 부릅니다.</p></details>
+    <details class="faq"><summary>연복리와 월복리 옵션의 차이는 무엇인가요?</summary><p>연복리는 입력한 이율이 연간 실효수익률이 되도록 월 이율 (1+r)^(1/12)−1을 적용합니다. 월복리는 명목이율을 12로 나눈 r/12을 매월 적용해, 연 실효수익률이 입력값보다 약간 높아집니다((1+r/12)^12−1).</p></details>
+    <details class="faq"><summary>월 적립금은 언제 납입한다고 가정하나요?</summary><p>매월 말 납입(기말불)을 가정합니다. 월초 납입(기수불)이면 결과가 (1+월이율)배만큼 커집니다.</p></details>
+    <details class="faq"><summary>72의 법칙이란?</summary><p>원금이 2배가 되는 기간을 어림하는 경험칙으로, 72를 연이율(%)로 나누면 대략의 년수가 나옵니다. 예: 연 6%면 72÷6 = 약 12년.</p></details>
+  </section>
+
+  <aside class="promo" data-coupang>
+    <div class="coupang-wrap">
+      <a href="https://link.coupang.com/a/flCfhuxEJM" target="_blank" rel="sponsored noopener" referrerpolicy="unsafe-url"><img src="https://ads-partners.coupang.com/banners/1006097?trackingCode=AF8748009&subId=&traceId=V0-301-879dd1202e5c73b2-I1006097&w=728&h=90" alt="쿠팡 파트너스 배너" style="max-width:100%;height:auto" loading="lazy"></a>
+    </div>
+    <p class="promo-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+  </aside>
+  <script>
+  setTimeout(function () {
+    document.querySelectorAll('[data-coupang]').forEach(function (el) {
+      var f = el.querySelector('iframe');
+      var m = el.querySelector('img');
+      var ok = (f && f.getBoundingClientRect().height >= 10) || (m && m.complete && m.naturalWidth > 0);
+      if (!ok) el.hidden = true;
+    });
+  }, 4000);
+  </script>
+</main>
+
+<footer class="site-footer">
+  <p class="disclaimer">본 시뮬레이션은 교육 목적이며 투자 조언이 아닙니다. 미래 수익률은 보장되지 않습니다.</p>
+  <p class="links"><a href="https://maestro24.github.io/salarylab/">연봉계산소</a> · <a href="https://maestro24.github.io/stockcal/">주식달력</a></p>
+  <p>© 2026 머니시뮬 (MoneySim)</p>
+</footer>
+
+<script type="module" src="./js/pages/compound.js"></script>
+
+<div class="side-rail side-l" data-coupang>
+  <script src="https://ads-partners.coupang.com/g.js"></script>
+  <script>new PartnersCoupang.G({ id: 1006093, template: "carousel", trackingCode: "AF8748009", width: "160", height: "600", tsource: "" });</script>
+</div>
+<div class="side-rail side-r" data-coupang>
+  <script>new PartnersCoupang.G({ id: 1006093, template: "carousel", trackingCode: "AF8748009", width: "160", height: "600", tsource: "" });</script>
+</div>
+</body>
+</html>

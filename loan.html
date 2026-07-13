@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2P73L29BH7"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2P73L29BH7');</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대출 상환 시뮬레이션 — 원리금균등·원금균등·만기일시 비교 + 중도상환 | 머니시뮬</title>
+<meta name="description" content="원리금균등·원금균등·만기일시 3가지 대출 상환 방식을 한 화면에서 비교하는 무료 시뮬레이터. 잔액 곡선, 총이자 차이, 중도상환 효과까지 계산합니다.">
+<link rel="canonical" href="https://maestro24.github.io/moneysim/loan.html">
+<meta property="og:title" content="대출 상환 시뮬레이션 — 3가지 상환 방식 비교">
+<meta property="og:description" content="원리금균등·원금균등·만기일시 총이자 비교와 중도상환 효과 계산.">
+<meta property="og:url" content="https://maestro24.github.io/moneysim/loan.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="머니시뮬">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230e9f6e'/%3E%3Cpath d='M7 21l6-7 5 4 7-9' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "대출 상환 비교 시뮬레이터 — 머니시뮬",
+      "url": "https://maestro24.github.io/moneysim/loan.html",
+      "description": "원리금균등·원금균등·만기일시 상환 방식을 비교하고 중도상환 효과를 계산하는 무료 대출 계산기.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "ko",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "원리금균등과 원금균등 중 어느 쪽 이자가 적나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "총이자는 항상 원금균등이 적습니다. 원금을 앞쪽에서 더 빨리 갚아 이자가 붙는 잔액이 빨리 줄기 때문입니다. 대신 초기 월 상환액이 원리금균등보다 큽니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "원리금균등 월 상환액 공식은 무엇인가요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A = P × r(1+r)^n / ((1+r)^n − 1)입니다. P는 원금, r은 월 이율(연이율÷12), n은 상환 개월 수입니다. 예: 3억원·30년·연 4%면 월 약 1,432,246원입니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "중도상환은 언제 하는 것이 유리한가요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "이자 절감 효과는 빠를수록 큽니다. 같은 금액이라도 초기에 상환하면 남은 기간 내내 이자가 줄기 때문입니다. 다만 중도상환수수료(통상 3년 내 0.5~1.4%)와 비교해 판단해야 합니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "만기일시 상환은 어떤 경우에 쓰나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "매월 이자만 내고 만기에 원금을 한꺼번에 갚는 방식으로, 전세자금대출 등 만기에 목돈이 돌아오는 경우에 주로 씁니다. 원금이 줄지 않아 총이자는 세 방식 중 가장 많습니다." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="./index.html">📈 머니시뮬</a>
+  <nav class="site-nav">
+    <a href="./retire.html">은퇴</a>
+    <a href="./compound.html">복리</a>
+    <a href="./dividend.html">배당</a>
+    <a href="./loan.html" class="active">대출</a>
+    <a href="./goal.html">목돈</a>
+  </nav>
+</div></header>
+
+<main class="container">
+  <h1 class="page-title">🏠 대출 상환 비교 시뮬레이터</h1>
+  <p class="page-desc"><strong>원리금균등 · 원금균등 · 만기일시</strong> 세 가지 상환 방식을 동시에 비교하고, 중도상환 효과까지 계산합니다.</p>
+
+  <section class="card">
+    <h2>대출 조건</h2>
+    <div class="form-grid">
+      <div class="field" id="f-p">
+        <label for="in-p">대출 원금</label>
+        <div class="row"><input type="number" id="in-p" inputmode="decimal"><span class="unit">만원</span></div>
+        <input type="range" aria-label="대출 원금 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-rate">
+        <label for="in-rate">연 금리</label>
+        <div class="row"><input type="number" id="in-rate" inputmode="decimal"><span class="unit">%</span></div>
+        <input type="range" aria-label="연 금리 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-years">
+        <label for="in-years">상환 기간</label>
+        <div class="row"><input type="number" id="in-years" inputmode="numeric"><span class="unit">년</span></div>
+        <input type="range" aria-label="상환 기간 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-pm">
+        <label for="in-pm">중도상환 시점 (0 = 없음)</label>
+        <div class="row"><input type="number" id="in-pm" inputmode="numeric"><span class="unit">개월차</span></div>
+        <input type="range" aria-label="중도상환 시점 슬라이더">
+        <div class="error"></div>
+      </div>
+      <div class="field" id="f-pa">
+        <label for="in-pa">중도상환 금액</label>
+        <div class="row"><input type="number" id="in-pa" inputmode="decimal"><span class="unit">만원</span></div>
+        <input type="range" aria-label="중도상환 금액 슬라이더">
+        <div class="error"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="btn-share">🔗 시나리오 공유</button>
+    </div>
+  </section>
+
+  <section class="card result-panel" id="result">
+    <div class="result-hero">
+      <div class="label">원리금균등 월 상환액</div>
+      <div class="result-big grade-good" id="monthly-payment">-</div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat"><div class="k">총이자 (원리금균등)</div><div class="v" id="stat-total-amort">-</div></div>
+      <div class="stat"><div class="k">총이자 (원금균등)</div><div class="v" id="stat-total-equal">-</div></div>
+      <div class="stat"><div class="k">두 방식 이자 차이</div><div class="v" id="stat-diff">-</div></div>
+    </div>
+    <div id="prepay-effect" style="display:none">
+      <h3>중도상환 효과</h3>
+      <p class="page-desc" id="prepay-desc"></p>
+    </div>
+    <h3>대출 잔액 곡선 (3방식 비교)</h3>
+    <div class="chart-box" id="chart-balance"></div>
+    <h3>총이자 비교</h3>
+    <div class="chart-box" id="chart-interest"></div>
+    <h3>월 상환액 비교표</h3>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>상환 방식</th><th>첫 달 상환액</th><th>마지막 달 상환액</th><th>총이자</th><th>총상환액</th></tr></thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card seo-content">
+    <h2>대출 상환 방식 3가지 정리</h2>
+    <p><strong>원리금균등</strong>은 매월 같은 금액(원금+이자)을 갚습니다. 월 상환액 공식은 아래와 같습니다.</p>
+    <div class="formula">A = P × r(1+r)<sup>n</sup> / ((1+r)<sup>n</sup> − 1) &nbsp;&nbsp;(P: 원금, r: 월 이율 = 연이율÷12, n: 개월 수)</div>
+    <p><strong>원금균등</strong>은 매월 원금을 P÷n씩 고정으로 갚고 잔액에 대한 이자를 더합니다. 초기 상환액이 크지만 매달 줄어들며, 총이자는 세 방식 중 가장 적습니다. <strong>만기일시</strong>는 매월 이자만 내고 만기에 원금을 일시 상환하는 방식으로 총이자가 가장 많습니다.</p>
+    <p>예시 검증값: 3억원을 30년, 연 4%로 원리금균등 상환하면 월 상환액은 약 <strong>1,432,246원</strong>입니다. 이 값은 공식으로 산출해 자동화 테스트에서 검증하는 기준값입니다.</p>
+    <h3>자주 묻는 질문</h3>
+    <details class="faq"><summary>원리금균등과 원금균등 중 어느 쪽 이자가 적나요?</summary><p>총이자는 항상 원금균등이 적습니다. 원금을 앞쪽에서 더 빨리 갚아 이자가 붙는 잔액이 빨리 줄기 때문입니다. 대신 초기 월 상환액이 원리금균등보다 큽니다.</p></details>
+    <details class="faq"><summary>원리금균등 월 상환액 공식은 무엇인가요?</summary><p>A = P × r(1+r)^n / ((1+r)^n − 1)입니다. P는 원금, r은 월 이율(연이율÷12), n은 상환 개월 수입니다. 예: 3억원·30년·연 4%면 월 약 1,432,246원입니다.</p></details>
+    <details class="faq"><summary>중도상환은 언제 하는 것이 유리한가요?</summary><p>이자 절감 효과는 빠를수록 큽니다. 같은 금액이라도 초기에 상환하면 남은 기간 내내 이자가 줄기 때문입니다. 다만 중도상환수수료(통상 3년 내 0.5~1.4%)와 비교해 판단해야 합니다.</p></details>
+    <details class="faq"><summary>만기일시 상환은 어떤 경우에 쓰나요?</summary><p>매월 이자만 내고 만기에 원금을 한꺼번에 갚는 방식으로, 전세자금대출 등 만기에 목돈이 돌아오는 경우에 주로 씁니다. 원금이 줄지 않아 총이자는 세 방식 중 가장 많습니다.</p></details>
+  </section>
+
+  <aside class="promo" data-coupang>
+    <div class="coupang-wrap">
+      <a href="https://link.coupang.com/a/flCfhuxEJM" target="_blank" rel="sponsored noopener" referrerpolicy="unsafe-url"><img src="https://ads-partners.coupang.com/banners/1006097?trackingCode=AF8748009&subId=&traceId=V0-301-879dd1202e5c73b2-I1006097&w=728&h=90" alt="쿠팡 파트너스 배너" style="max-width:100%;height:auto" loading="lazy"></a>
+    </div>
+    <p class="promo-disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+  </aside>
+  <script>
+  setTimeout(function () {
+    document.querySelectorAll('[data-coupang]').forEach(function (el) {
+      var f = el.querySelector('iframe');
+      var m = el.querySelector('img');
+      var ok = (f && f.getBoundingClientRect().height >= 10) || (m && m.complete && m.naturalWidth > 0);
+      if (!ok) el.hidden = true;
+    });
+  }, 4000);
+  </script>
+</main>
+
+<footer class="site-footer">
+  <p class="disclaimer">본 시뮬레이션은 교육 목적이며 투자 조언이 아닙니다. 미래 수익률은 보장되지 않습니다.</p>
+  <p class="links"><a href="https://maestro24.github.io/salarylab/">연봉계산소</a> · <a href="https://maestro24.github.io/stockcal/">주식달력</a></p>
+  <p>© 2026 머니시뮬 (MoneySim)</p>
+</footer>
+
+<script type="module" src="./js/pages/loan.js"></script>
+
+<div class="side-rail side-l" data-coupang>
+  <script src="https://ads-partners.coupang.com/g.js"></script>
+  <script>new PartnersCoupang.G({ id: 1006093, template: "carousel", trackingCode: "AF8748009", width: "160", height: "600", tsource: "" });</script>
+</div>
+<div class="side-rail side-r" data-coupang>
+  <script>new PartnersCoupang.G({ id: 1006093, template: "carousel", trackingCode: "AF8748009", width: "160", height: "600", tsource: "" });</script>
+</div>
+</body>
+</html>

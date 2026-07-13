@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maestro24.github.io/moneysim/sitemap.xml
