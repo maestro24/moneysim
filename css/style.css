@@ -280,7 +280,7 @@ table.data tr.highlight { background: var(--accent-light); font-weight: 700; }
 }
 .tool-card:hover { transform: translateY(-2px); border-color: var(--accent); }
 .tool-card .icon { font-size: 1.7rem; }
-.tool-card h3 { margin: 8px 0 5px; font-size: 1.05rem; }
+.tool-card h3, .tool-card h2 { margin: 8px 0 5px; font-size: 1.05rem; }
 .tool-card p { margin: 0; font-size: 0.85rem; color: var(--text-sub); }
 
 /* ---- SEO 콘텐츠 / FAQ ---- */
