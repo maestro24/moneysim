@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>배당 재투자 계산기 — 배당 스노우볼 시뮬레이션 (월 배당 목표) | 머니시뮬</title>
-<meta name="description" content="배당 재투자 스노우볼 효과를 시뮬레이션하는 무료 계산기. 배당수익률·배당성장률·주가성장률을 반영해 월 배당 목표 도달 시점을 계산합니다.">
+<meta name="description" content="배당 재투자 스노우볼 효과를 시뮬레이션하는 무료 배당금 계산기. 배당수익률·배당성장률·주가성장률을 반영해 월 배당금 목표 도달 시점을 계산합니다.">
 <link rel="canonical" href="https://maestro24.github.io/moneysim/dividend.html">
 <meta property="og:title" content="배당 재투자 계산기 — 배당 스노우볼 시뮬레이션">
 <meta property="og:description" content="배당 재투자 스노우볼 효과와 월 배당 목표 도달 시점 계산.">
@@ -51,6 +51,11 @@
           "@type": "Question",
           "name": "세금은 반영되나요?",
           "acceptedAnswer": { "@type": "Answer", "text": "반영되지 않습니다. 한국 기준 배당소득세(15.4%)를 고려하려면 배당수익률에 0.846을 곱한 값을 입력하는 방법이 있습니다." }
+        },
+        {
+          "@type": "Question",
+          "name": "배당금 계산기로 월 배당 목표를 어떻게 잡나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "'목표 월 배당'에 원하는 금액(예: 월 100만원)을 넣으면, 현재 투자금·월 추가 투자·배당수익률·배당성장률을 바탕으로 그 목표에 도달하는 시점을 계산해 줍니다. 배당수익률이 높은 종목은 초기 배당금이 크고, 배당성장률이 높은 종목은 후반 월 배당금이 역전되는 것을 표와 차트에서 비교할 수 있습니다." }
         }
       ]
     }
@@ -150,6 +155,7 @@
     <details class="faq"><summary>배당수익률과 배당성장률은 어떻게 다른가요?</summary><p>배당수익률은 현재 주가 대비 연간 배당금의 비율(예: 3.5%)이고, 배당성장률은 주당 배당금이 매년 늘어나는 속도(예: 연 5%)입니다. 이 계산기는 두 값을 독립적으로 입력받아 주당 배당금과 주가를 각각 성장시킵니다.</p></details>
     <details class="faq"><summary>배당은 언제 지급된다고 가정하나요?</summary><p>연간 배당의 1/12이 매월 지급되고 즉시 재투자된다고 가정합니다. 실제 분기·반기 배당과는 시점 차이가 있지만 장기 추세에는 큰 영향이 없습니다.</p></details>
     <details class="faq"><summary>세금은 반영되나요?</summary><p>반영되지 않습니다. 한국 기준 배당소득세(15.4%)를 고려하려면 배당수익률에 0.846을 곱한 값을 입력하는 방법이 있습니다.</p></details>
+    <details class="faq"><summary>배당금 계산기로 월 배당 목표를 어떻게 잡나요?</summary><p>'목표 월 배당'에 원하는 금액(예: 월 100만원)을 넣으면, 현재 투자금·월 추가 투자·배당수익률·배당성장률을 바탕으로 그 목표에 도달하는 시점을 계산해 줍니다. 배당수익률이 높은 종목은 초기 배당금이 크고, 배당성장률이 높은 종목은 후반 월 배당금이 역전되는 것을 표와 차트에서 비교할 수 있습니다.</p></details>
   </section>
 
   <aside class="promo" data-coupang>

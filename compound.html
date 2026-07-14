@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>복리 계산기 — 적립식 복리 이자 계산 (월 적립 + 일시금) | 머니시뮬</title>
-<meta name="description" content="일시금과 월 적립을 함께 계산하는 무료 복리 계산기. 연복리·월복리 선택, 원금과 이자를 분리한 성장 차트, 연도별 상세 표까지 제공합니다.">
+<meta name="description" content="일시금과 월 적립을 함께 계산하는 무료 복리 계산기. 적금·적립식 투자의 복리 효과를 연복리·월복리로 계산하고, 원금과 이자를 분리한 성장 차트와 연도별 상세 표까지 제공합니다.">
 <link rel="canonical" href="https://maestro24.github.io/moneysim/compound.html">
 <meta property="og:title" content="복리 계산기 — 적립식 복리 이자 계산">
 <meta property="og:description" content="일시금 + 월 적립 복리 계산. 원금·이자 분리 차트와 연도별 표.">
@@ -51,6 +51,11 @@
           "@type": "Question",
           "name": "72의 법칙이란?",
           "acceptedAnswer": { "@type": "Answer", "text": "원금이 2배가 되는 기간을 어림하는 경험칙으로, 72를 연이율(%)로 나누면 대략의 년수가 나옵니다. 예: 연 6%면 72÷6 = 약 12년." }
+        },
+        {
+          "@type": "Question",
+          "name": "적금·예금 복리 계산에도 쓸 수 있나요?",
+          "acceptedAnswer": { "@type": "Answer", "text": "네. 매월 일정액을 넣는 적금은 월 적립액에, 목돈을 예치하는 예금은 시작 일시금에 금액을 넣으면 됩니다. 다만 은행 적금 이자는 대부분 단리이거나 만기 일시 지급이라, 이 계산기의 복리 결과보다 낮을 수 있습니다. 배당·펀드처럼 이자를 재투자하는 적립식 투자의 복리 효과를 볼 때 특히 유용합니다." }
         }
       ]
     }
@@ -149,6 +154,7 @@
     <details class="faq"><summary>연복리와 월복리 옵션의 차이는 무엇인가요?</summary><p>연복리는 입력한 이율이 연간 실효수익률이 되도록 월 이율 (1+r)^(1/12)−1을 적용합니다. 월복리는 명목이율을 12로 나눈 r/12을 매월 적용해, 연 실효수익률이 입력값보다 약간 높아집니다((1+r/12)^12−1).</p></details>
     <details class="faq"><summary>월 적립금은 언제 납입한다고 가정하나요?</summary><p>매월 말 납입(기말불)을 가정합니다. 월초 납입(기수불)이면 결과가 (1+월이율)배만큼 커집니다.</p></details>
     <details class="faq"><summary>72의 법칙이란?</summary><p>원금이 2배가 되는 기간을 어림하는 경험칙으로, 72를 연이율(%)로 나누면 대략의 년수가 나옵니다. 예: 연 6%면 72÷6 = 약 12년.</p></details>
+    <details class="faq"><summary>적금·예금 복리 계산에도 쓸 수 있나요?</summary><p>네. 매월 일정액을 넣는 적금은 월 적립액에, 목돈을 예치하는 예금은 시작 일시금에 금액을 넣으면 됩니다. 다만 은행 적금 이자는 대부분 단리이거나 만기 일시 지급이라, 이 계산기의 복리 결과보다 낮을 수 있습니다. 배당·펀드처럼 이자를 재투자하는 적립식 투자의 복리 효과를 볼 때 특히 유용합니다.</p></details>
   </section>
 
   <aside class="promo" data-coupang>

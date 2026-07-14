@@ -13,8 +13,16 @@
 ## 계산기
 
 - [메인](https://maestro24.github.io/moneysim/): 5개 재테크 계산기 모음
-- [은퇴 시뮬레이터](https://maestro24.github.io/moneysim/retire.html): 10,000개 시나리오로 은퇴 자금 성공확률과 자산 경로 밴드 (파이어족 계산기)
-- [복리 계산기](https://maestro24.github.io/moneysim/compound.html): 일시금 + 월 적립 복리, 원금과 이자를 분리한 성장 차트와 연도별 표
-- [배당 재투자 계산기](https://maestro24.github.io/moneysim/dividend.html): 배당 스노우볼 효과 시각화, 월 배당 목표 도달 시점 계산
-- [대출 상환 비교](https://maestro24.github.io/moneysim/loan.html): 원리금균등·원금균등·만기일시 총이자 비교와 중도상환 효과
-- [목돈 목표 계산기](https://maestro24.github.io/moneysim/goal.html): 목표액·기간·수익률로 필요한 월 저축액을 역산, 수익률 민감도 표
+- [은퇴 시뮬레이터](https://maestro24.github.io/moneysim/retire.html): 10,000개 시나리오로 은퇴자금·노후자금 성공확률과 자산 경로 밴드 (파이어족 계산기, 4% 룰 대안)
+- [복리 계산기](https://maestro24.github.io/moneysim/compound.html): 일시금 + 월 적립 복리, 적금·적립식 투자의 복리 효과, 원금과 이자를 분리한 성장 차트와 연도별 표
+- [배당 재투자 계산기](https://maestro24.github.io/moneysim/dividend.html): 배당금 계산기, 배당 스노우볼 효과 시각화, 배당수익률 기반 월 배당 목표 도달 시점 계산
+- [대출 상환 비교](https://maestro24.github.io/moneysim/loan.html): 대출 이자 계산기, 원리금균등·원금균등·만기일시 총이자 비교와 중도상환 효과
+- [목돈 목표 계산기](https://maestro24.github.io/moneysim/goal.html): 목돈 마련 저축 계획, 목표액·기간·수익률로 필요한 월 저축액을 역산, 수익률 민감도 표
+
+## 자주 찾는 검색 주제
+
+- 은퇴자금 얼마·노후자금 계산·은퇴 시뮬레이션·4% 룰 → 은퇴 시뮬레이터
+- 복리 계산기·복리 효과·적금 복리·72의 법칙 → 복리 계산기
+- 배당금 계산기·배당 재투자·배당수익률·배당 스노우볼 → 배당 재투자 계산기
+- 대출 이자 계산기·원리금 균등상환·대출 상환 계산·중도상환 → 대출 상환 비교
+- 목돈 마련·저축 계획·1억 모으기·목표 금액 월 저축액 → 목돈 목표 계산기
